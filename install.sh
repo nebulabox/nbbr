@@ -97,6 +97,7 @@ cd $(dirname "$0")
 make
 make load
 
+sysctl -p
 echo "==>> Avail:   $(sysctl net.ipv4.tcp_available_congestion_control)"
 echo "==>> Current: $(sysctl net.ipv4.tcp_congestion_control)"
 
