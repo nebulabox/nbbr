@@ -91,6 +91,14 @@ if [ ! -f /usr/src/linux-headers-$(uname -r)/.config ]; then
 	fi
 fi
 
+cd $(dirname "$0")
 
+# make clean
+make
+make load
+
+echo "==>> Avail:   $(sysctl net.ipv4.tcp_available_congestion_control)"
+echo "==>> Current: $(sysctl net.ipv4.tcp_congestion_control)"
 
 echo "==== ALL DONE ===="
+
