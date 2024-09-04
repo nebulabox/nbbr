@@ -44,39 +44,39 @@ nic=$(ip addr | grep 'state UP' | awk '{print $2}' | sed 's/.$//' | cut -d'@' -f
 echo "[Info]==> nic=$nic"
 
 # Linux Headers
-if [[ "$os" =~ "Debian" ]]; then
-    if [ $(uname -m) == "x86_64" ]; then
-        apt-get -y install linux-image-amd64 linux-headers-amd64
-        if [ $? -ne 0 ]; then
-            fail "Linux headers installation failed"
-            return 1
-        fi
-    elif [ $(uname -m) == "aarch64" ]; then
-        apt-get -y install linux-image-arm64 linux-headers-arm64
-        if [ $? -ne 0 ]; then
-            fail "Linux headers  installation failed"
-            return 1
-        fi
-    fi
-elif [[ "$os" =~ "Ubuntu" ]]; then
-    apt-get -y install linux-image-generic linux-headers-generic
-    if [ $? -ne 0 ]; then
-        fail "Linux headers  installation failed"
-        return 1
-    fi
-else
-    fail "Unsupported OS"
-    return 1
-fi
+# if [[ "$os" =~ "Debian" ]]; then
+#     if [ $(uname -m) == "x86_64" ]; then
+#         apt-get -y install linux-image-amd64 linux-headers-amd64
+#         if [ $? -ne 0 ]; then
+#             fail "Linux headers installation failed"
+#             return 1
+#         fi
+#     elif [ $(uname -m) == "aarch64" ]; then
+#         apt-get -y install linux-image-arm64 linux-headers-arm64
+#         if [ $? -ne 0 ]; then
+#             fail "Linux headers  installation failed"
+#             return 1
+#         fi
+#     fi
+# elif [[ "$os" =~ "Ubuntu" ]]; then
+#     apt-get -y install linux-image-generic linux-headers-generic
+#     if [ $? -ne 0 ]; then
+#         fail "Linux headers  installation failed"
+#         return 1
+#     fi
+# else
+#     fail "Unsupported OS"
+#     return 1
+# fi
 
 #Install dkms if not installed
-if [ ! -x /usr/sbin/dkms ]; then
-	apt-get -y install dkms
-    if [ ! -x /usr/sbin/dkms ]; then
-		echo "Error: dkms is not installed" >&2
-		exit 1
-	fi
-fi
+# if [ ! -x /usr/sbin/dkms ]; then
+# 	apt-get -y install dkms
+#     if [ ! -x /usr/sbin/dkms ]; then
+# 		echo "Error: dkms is not installed" >&2
+# 		exit 1
+# 	fi
+# fi
 
 #Ensure there is header file
 if [ ! -f /usr/src/linux-headers-$(uname -r)/.config ]; then
