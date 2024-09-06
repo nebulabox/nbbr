@@ -101,5 +101,14 @@ sysctl -p
 echo "==>> Avail:   $(sysctl net.ipv4.tcp_available_congestion_control)"
 echo "==>> Current: $(sysctl net.ipv4.tcp_congestion_control)"
 
+
+echo """
+# root
+# crontab -e
+@reboot /home/nebulabox/src/nbbr/install.sh
+@reboot /usr/bin/sleep 5; /usr/sbin/sysctl -p
+0 * * * * /home/nebulabox/src/nbbr/install.sh
+"""
+
 echo "==== ALL DONE ===="
 
