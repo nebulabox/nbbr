@@ -64,6 +64,7 @@
 #include <linux/inet.h>
 #include <linux/random.h>
 #include <linux/win_minmax.h>
+#include <linux/version.h>
 
 /* Scale factor for rate in pkt/uSec unit to avoid truncation in bandwidth
  * estimation. The rate unit ~= (1500 bytes / 1 usec / 2^24) ~= 715 bps.
@@ -1149,7 +1150,7 @@ static struct tcp_congestion_ops tcp_bbr_cong_ops __read_mostly = {
 	.name		= "nbbr",
 	.owner		= THIS_MODULE,
 	.init		= bbr_init,
-	.cong_control	= bbr_main,
+	.cong_control	= nbbr_main,
 	.sndbuf_expand	= bbr_sndbuf_expand,
 	.undo_cwnd	= bbr_undo_cwnd,
 	.cwnd_event	= bbr_cwnd_event,
