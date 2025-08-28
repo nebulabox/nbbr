@@ -1024,7 +1024,11 @@ static void bbr_update_model(struct sock *sk, const struct rate_sample *rs)
 	bbr_update_gains(sk);
 }
 
-static void bbr_main(struct sock *sk, unsigned int,  int, const struct rate_sample *rs)
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 10, 0)
+static void nbbr_main(struct sock *sk, u32 ack, int flag, const struct rate_sample *rs)
+#else
+static void nbbr_main(struct sock *sk, const struct rate_sample *rs)
+#endif
 {
 	struct bbr *bbr = inet_csk_ca(sk);
 	u32 bw;
@@ -1191,6 +1195,7 @@ static void __exit bbr_unregister(void)
 module_init(bbr_register);
 module_exit(bbr_unregister);
 
+MODULE_AUTHOR("nebulabox <nebulabox@google.com>");
 MODULE_AUTHOR("Van Jacobson <vanj@google.com>");
 MODULE_AUTHOR("Neal Cardwell <ncardwell@google.com>");
 MODULE_AUTHOR("Yuchung Cheng <ycheng@google.com>");
