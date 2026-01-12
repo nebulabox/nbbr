@@ -15,9 +15,9 @@ static int init_rate = 20; // 1 Mbps: 125000, 10M: 1250000, 20M: 2500000, 30M:37
 
 module_param(init_rate, int, 0644);
 MODULE_PARM_DESC(init_rate, "An integer for init rate: 1 Mbps: 125000, 10M: 1250000, 20M: 2500000, 30M:3750000  50M: 6250000");
-// Command Line: sudo insmod my_module.ko init_rate=6250000
-// Persistent Config File: Create a file at /etc/modprobe.d/nbbr.conf 
-//      options nbbr init_rate=6250000
+// Command Line: sudo insmod tcp_nbbr.ko init_rate=6250000
+// Persistent Config File: Create a file at /etc/modprobe.d/tcp_nbbr.conf 
+//      options tcp_nbbr init_rate=6250000
 
 #define INIT_CWND_GAIN 20
 
