@@ -11,10 +11,17 @@
  and your kernel version is greater than 5.8.
 #endif
 
-#define INIT_PACING_RATE 3750000 // 1 Mbps: 125000, 30M:3750000  50M: 6250000
+static int init_rate = 3750000; // 1 Mbps: 125000, 30M:3750000  50M: 6250000
+
+module_param(init_rate, int, 0644);
+MODULE_PARM_DESC(init_rate, "An integer, 1 Mbps: 125000, 30M:3750000  50M: 6250000");
+// Command Line: sudo insmod my_module.ko init_rate=6250000
+// Persistent Config File: Create a file at /etc/modprobe.d/nbbr.conf 
+//      options nbbr init_rate=6250000
+
 #define INIT_CWND_GAIN 20
 
-#define MIN_PACING_RATE 625000 // 500 Kbps: 62500, 5M: 625000
+#define MIN_PACING_RATE 1250000 // 500 Kbps: 62500, 10M: 625000
 #define MIN_CWND_GAIN 5
 #define MAX_CWND_GAIN 80
 #define MIN_CWND 4
@@ -153,7 +160,7 @@ static void brutal_init(struct sock *sk)
 
     tp->snd_ssthresh = TCP_INFINITE_SSTHRESH;
 
-    brutal->rate = INIT_PACING_RATE;
+    brutal->rate = init_rate;
     brutal->cwnd_gain = INIT_CWND_GAIN;
 
     memset(brutal->slots, 0, sizeof(brutal->slots));
