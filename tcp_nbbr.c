@@ -11,7 +11,7 @@
  and your kernel version is greater than 5.8.
 #endif
 
-static int init_rate = 2500000; // 1 Mbps: 125000, 10M: 1250000, 20M: 2500000, 30M:3750000, 50M: 6250000
+static int init_rate = 20; // 1 Mbps: 125000, 10M: 1250000, 20M: 2500000, 30M:3750000, 50M: 6250000
 
 module_param(init_rate, int, 0644);
 MODULE_PARM_DESC(init_rate, "An integer for init rate: 1 Mbps: 125000, 10M: 1250000, 20M: 2500000, 30M:3750000  50M: 6250000");
@@ -160,7 +160,8 @@ static void brutal_init(struct sock *sk)
 
     tp->snd_ssthresh = TCP_INFINITE_SSTHRESH;
 
-    brutal->rate = init_rate;
+    pr_info("[nbbr]: The initial rate is: %d Mbps\n", init_rate);
+    brutal->rate = init_rate * 125000;
     brutal->cwnd_gain = INIT_CWND_GAIN;
 
     memset(brutal->slots, 0, sizeof(brutal->slots));
