@@ -15,9 +15,10 @@ static int init_rate = 20; // 1 Mbps: 125000, 10M: 1250000, 20M: 2500000, 30M:37
 
 module_param(init_rate, int, 0644);
 MODULE_PARM_DESC(init_rate, "An integer for init rate: 1 Mbps: 125000, 10M: 1250000, 20M: 2500000, 30M:3750000  50M: 6250000");
-// Command Line: sudo insmod tcp_nbbr.ko init_rate=6250000
-// Persistent Config File: Create a file at /etc/modprobe.d/tcp_nbbr.conf 
-//      options tcp_nbbr init_rate=6250000
+// Command Line: sudo insmod tcp_nbbr.ko init_rate=50
+// manual set value
+// sh -c 'echo 30 > /sys/module/tcp_nbbr/parameters/init_rate'
+// cat /sys/module/tcp_nbbr/parameters/init_rate
 
 #define INIT_CWND_GAIN 20
 
@@ -160,7 +161,7 @@ static void brutal_init(struct sock *sk)
 
     tp->snd_ssthresh = TCP_INFINITE_SSTHRESH;
 
-    pr_info("[nbbr]: The initial rate is: %d Mbps\n", init_rate);
+    // pr_info("[nbbr]: The initial rate is: %d Mbps\n", init_rate);
     brutal->rate = init_rate * 125000;
     brutal->cwnd_gain = INIT_CWND_GAIN;
 
