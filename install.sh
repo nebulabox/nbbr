@@ -116,6 +116,8 @@ cat /sys/module/tcp_nbbr/parameters/init_rate
 @reboot /home/nebulabox/src/nbbr/install.sh
 @reboot /usr/bin/sleep 5; /usr/sbin/sysctl -p
 0 * * * * /home/nebulabox/src/nbbr/install.sh
+# --->>> NOTE: change 30Mbps to any others
+* * * * * sh -c 'echo 30 > /sys/module/tcp_nbbr/parameters/init_rate'
 """
 
 echo "==== ALL DONE ===="
