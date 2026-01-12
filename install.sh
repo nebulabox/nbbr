@@ -104,11 +104,14 @@ echo "==>> Current: $(sysctl net.ipv4.tcp_congestion_control)"
 
 echo """
 # root
-# ===>> Default rate is [30Mbps], if need change
-# 1 Mbps: 125000, 30M:3750000  50M: 6250000
+# ===>> setup nbbr, change /etc/sysctl.conf
+#     net.ipv4.tcp_congestion_control=nbbr
+# 
+# ===>> Default rate is [30Mbps], if need change /etc/modprobe.d/nbbr.conf and reboot
+# 1 Mbps: 125000, 10M: 1250000, 20M: 2500000, 30M:3750000  50M: 6250000
 # Create a file at /etc/modprobe.d/nbbr.conf 
 #   options nbbr init_rate=6250000
-# ====
+#
 # crontab -e
 @reboot /home/nebulabox/src/nbbr/install.sh
 @reboot /usr/bin/sleep 5; /usr/sbin/sysctl -p

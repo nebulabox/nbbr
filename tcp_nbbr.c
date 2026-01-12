@@ -11,17 +11,17 @@
  and your kernel version is greater than 5.8.
 #endif
 
-static int init_rate = 3750000; // 1 Mbps: 125000, 30M:3750000  50M: 6250000
+static int init_rate = 2500000; // 1 Mbps: 125000, 10M: 1250000, 20M: 2500000, 30M:3750000, 50M: 6250000
 
 module_param(init_rate, int, 0644);
-MODULE_PARM_DESC(init_rate, "An integer, 1 Mbps: 125000, 30M:3750000  50M: 6250000");
+MODULE_PARM_DESC(init_rate, "An integer for init rate: 1 Mbps: 125000, 10M: 1250000, 20M: 2500000, 30M:3750000  50M: 6250000");
 // Command Line: sudo insmod my_module.ko init_rate=6250000
 // Persistent Config File: Create a file at /etc/modprobe.d/nbbr.conf 
 //      options nbbr init_rate=6250000
 
 #define INIT_CWND_GAIN 20
 
-#define MIN_PACING_RATE 1250000 // 500 Kbps: 62500, 10M: 625000
+#define MIN_PACING_RATE 125000 // 500 Kbps: 62500, 1M: 125000
 #define MIN_CWND_GAIN 5
 #define MAX_CWND_GAIN 80
 #define MIN_CWND 4
