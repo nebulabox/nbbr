@@ -105,6 +105,7 @@ echo "==>> Current: $(sysctl net.ipv4.tcp_congestion_control)"
 echo """
 # root
 # ===>> setup nbbr, change /etc/sysctl.conf
+net.core.default_qdisc=fq  # opt
 net.ipv4.tcp_congestion_control=nbbr
 # 
 # ===>> Default rate is [20]Mbps

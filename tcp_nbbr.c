@@ -11,7 +11,7 @@
  and your kernel version is greater than 5.8.
 #endif
 
-static int init_rate = 20; // 1 Mbps: 125000, 10M: 1250000, 20M: 2500000, 30M:3750000, 50M: 6250000
+static int init_rate = 29; // 1 Mbps: 125000, 10M: 1250000, 20M: 2500000, 30M:3750000, 50M: 6250000
 
 module_param(init_rate, int, 0644);
 MODULE_PARM_DESC(init_rate, "An integer for init rate: 1 Mbps: 125000, 10M: 1250000, 20M: 2500000, 30M:3750000  50M: 6250000");
@@ -20,7 +20,7 @@ MODULE_PARM_DESC(init_rate, "An integer for init rate: 1 Mbps: 125000, 10M: 1250
 // sh -c 'echo 30 > /sys/module/tcp_nbbr/parameters/init_rate'
 // cat /sys/module/tcp_nbbr/parameters/init_rate
 
-#define INIT_CWND_GAIN 20
+#define INIT_CWND_GAIN 40
 
 #define MIN_PACING_RATE 125000 // 500 Kbps: 62500, 1M: 125000
 #define MIN_CWND_GAIN 5
