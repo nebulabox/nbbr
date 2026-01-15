@@ -11,7 +11,7 @@
  and your kernel version is greater than 5.8.
 #endif
 
-static int init_rate = 19; // 1 Mbps: 125000, 10M: 1250000, 20M: 2500000, 30M:3750000, 50M: 6250000
+static int init_rate = 29; // 1 Mbps: 125000, 10M: 1250000, 20M: 2500000, 30M:3750000, 50M: 6250000
 
 module_param(init_rate, int, 0644);
 MODULE_PARM_DESC(init_rate, "An integer for init rate: 1 Mbps: 125000, 10M: 1250000, 20M: 2500000, 30M:3750000  50M: 6250000");
